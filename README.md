@@ -1,6 +1,6 @@
 # ✨ Chat Connect ✨
 
-<img width="1536" height="672" alt="chat" src="https://github.com/user-attachments/assets/94d69c55-a1f7-41a8-a1ef-73a85da57e4a" />
+<img width="1536" height="608" alt="chat" src="https://github.com/user-attachments/assets/76ef71b0-66b8-47b9-8446-d38d9ac64bd4" />
 
 Chat Connect is a real-time chat application built with the MERN stack. It allows users to communicate with each other instantly, with features like one-on-one messaging, online status indicators, and more.
 
