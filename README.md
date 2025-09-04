@@ -64,16 +64,16 @@ Chat Connect is a real-time chat application built with the MERN stack. It allow
     ```
 
 ### Environment Variables
-
-- Create a `.env` file in the `backend` directory and add the following variables:
-- PORT=5001
-- MONGODB_URI=<your_mongodb_uri>
-- JWT_SECRET=<your_jwt_secret>
-- CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
-- CLOUDINARY_API_KEY=<your_cloudinary_api_key>
-- CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
-- ENCRYPTION_KEY=<your_32_byte_encryption_key_in_hex>
-
+Create a `.env` file in the `backend` directory and add the following variables:
+```env
+PORT=5001
+MONGODB_URI=<your_mongodb_uri>
+JWT_SECRET=<your_jwt_secret>
+CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
+CLOUDINARY_API_KEY=<your_cloudinary_api_key>
+CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
+ENCRYPTION_KEY=<your_32_byte_encryption_key_in_hex>
+```
 
 ### Running the Application
 
