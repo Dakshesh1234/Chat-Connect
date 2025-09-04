@@ -5,20 +5,36 @@ import { Camera, Mail, User } from "lucide-react";
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
   const [selectedImg, setSelectedImg] = useState(null);
+  const [fullName, setFullName] = useState(authUser.fullName);
+  const [email, setEmail] = useState(authUser.email);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
 
     reader.onload = async () => {
-      const base64Image = reader.result;
-      setSelectedImg(base64Image);
-      await updateProfile({ profilePic: base64Image });
+      setSelectedImg(reader.result);
     };
+  };
+
+  const handleApplyChanges = async () => {
+    const changes = {};
+    if (selectedImg) {
+      changes.profilePic = selectedImg;
+    }
+    if (fullName !== authUser.fullName) {
+      changes.fullName = fullName;
+    }
+    if (email !== authUser.email) {
+      changes.email = email;
+    }
+
+    if (Object.keys(changes).length > 0) {
+      await updateProfile(changes);
+    }
   };
 
   return (
@@ -42,9 +58,9 @@ const ProfilePage = () => {
               <label
                 htmlFor="avatar-upload"
                 className={`
-                  absolute bottom-0 right-0 
+                  absolute bottom-0 right-0
                   bg-base-content hover:scale-105
-                  p-2 rounded-full cursor-pointer 
+                  p-2 rounded-full cursor-pointer
                   transition-all duration-200
                   ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""}
                 `}
@@ -71,7 +87,12 @@ const ProfilePage = () => {
                 <User className="w-4 h-4" />
                 Full Name
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.fullName}</p>
+              <input
+                type='text'
+                className="px-4 py-2.5 bg-base-200 rounded-lg border w-full"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
             </div>
 
             <div className="space-y-1.5">
@@ -79,7 +100,12 @@ const ProfilePage = () => {
                 <Mail className="w-4 h-4" />
                 Email Address
               </div>
-              <p className="px-4 py-2.5 bg-base-200 rounded-lg border">{authUser?.email}</p>
+              <input
+                type='email'
+                className="px-4 py-2.5 bg-base-200 rounded-lg border w-full"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
           </div>
 
@@ -96,6 +122,14 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
+
+          <button
+            className="btn btn-primary w-full"
+            onClick={handleApplyChanges}
+            disabled={isUpdatingProfile}
+          >
+            {isUpdatingProfile ? "Applying..." : "Apply Changes"}
+          </button>
         </div>
       </div>
     </div>
